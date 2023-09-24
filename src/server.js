@@ -1,9 +1,10 @@
 const crypto = require('crypto');
 const https = require('https');
+const webpush = require('web-push');
 
 class CoCreateNotification {
     constructor(crud) {
-        this.wsManager = crud.wsManager
+        this.socket = crud.wsManager
         this.crud = crud
         this.newKeyMap = new Map()
         this.subscriptions = new Map()
@@ -11,10 +12,10 @@ class CoCreateNotification {
     }
 
     init() {
-        if (this.wsManager) {
-            this.wsManager.on('notification.publicKey', (data) => this.publicKey(data));
-            this.wsManager.on('notification.subscription', (data) => this.subscription(data));
-            this.wsManager.on('notification.send', (data) => this.send(data));
+        if (this.socket) {
+            this.socket.on('notification.publicKey', (data) => this.publicKey(data));
+            this.socket.on('notification.subscription', (data) => this.subscription(data));
+            this.socket.on('notification.send', (data) => this.send(data));
         }
     }
 
@@ -22,14 +23,29 @@ class CoCreateNotification {
     publicKey(data) {
         let subscription = this.subscriptions.has(data.clientId)
         if (!subscription) {
-            let newKeys = this.generateVapidKeys()
-            this.newKeyMap.set(data.clientId, newKeys)
-            data.publicKey = newKeyMap.publicKey
+            // let newKeys = this.generateVapidKeys()
+            let newKeys = webpush.generateVAPIDKeys()
+
+            console.log('Before: ', newKeys.publicKey)
+            webpush.setVapidDetails(
+                'mailto:contact@cocreate.app',
+                newKeys.publicKey,
+                newKeys.privateKey
+            );
+
+            // Request a VAPID key
+            const vapidRequest = webpush.generateRequestDetails();
+            console.log('vapidRequest: ', vapidRequest)
+
+            data.publicKey = this.base64URLEncode(base64URLEncode(vapidRequest.keys.p256dh))
+            this.newKeyMap.set(data.clientId, { publicKey: data.publicKey, privateKey: this.base64URLEncode(vapidRequest.keys.auth) })
         } else {
             data.publicKey = subscription.publicKey
         }
 
-        this.socket.send(data)
+        console.log('After: ', data.publicKey)
+        if (data.socket)
+            this.socket.send(data)
 
     }
 
@@ -78,7 +94,7 @@ class CoCreateNotification {
         if (data.payload && !data.payload.timestamp)
             data.payload.timestamp = Date.now()
 
-        let payload = {...subscription, ...data.payload}
+        let payload = { ...subscription, ...data.payload }
         delete payload.privateKey
         delete payload.publicKey
         payload = JSON.stringify(payload);
@@ -138,10 +154,11 @@ class CoCreateNotification {
 
     // Function to base64 URL encode
     base64URLEncode(value) {
-        return value.toString('base64')
+        const base64 = Buffer.from(value).toString('base64');
+        return base64
             .replace(/\+/g, '-')
             .replace(/\//g, '_')
-            .replace(/=/g, '');
+            .replace(/=+$/, ''); // Remove trailing equal signs
     }
 
 
@@ -157,7 +174,7 @@ const payloadExample = {
         { action: 'action-2', title: 'Action 2' },
     ],
     tag: 'notification-tag', // A unique identifier for the notification
-    data,
+    data: {},
     vibrate: [100, 50, 100], // Vibration pattern (milliseconds)
     image: '/path/to/notification-image.jpg', // An image to display within the notification
     requireInteraction: true, // Requires user interaction to close the notification

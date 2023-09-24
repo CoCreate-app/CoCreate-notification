@@ -1,14 +1,6 @@
 import socket from '@cocreate/socket-client'
 // import actions from '@cocreate/actions'
 
-// Request push notification permission
-const permission = await Notification.requestPermission();
-if (permission === 'granted') {
-    // User granted push notification permission, handle it here
-    subscribeToPushNotifications();
-}
-
-
 async function handlePushPermission() {
     // Request push notification permission
     const permission = await Notification.requestPermission();
@@ -77,3 +69,4 @@ document.querySelector('[actions*="notification.subscribe"]').addEventListener('
 //     endEvent: "notification",
 //     callback: (action) => handlePushPermission
 // });
+export default {}
