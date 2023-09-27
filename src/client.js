@@ -10,14 +10,9 @@ async function handlePushPermission() {
         const registration = await navigator.serviceWorker.ready;
         try {
             // Create a new subscription or retrieve the existing one
-            const existingSubscription = await registration.pushManager.getSubscription();
+            let subscription = await registration.pushManager.getSubscription();
 
-            if (existingSubscription) {
-                // Update the existing subscription if needed
-                // This might involve generating a new public key or other changes
-                // For this example, we'll assume no updates are needed
-                console.log('Subscription already exists:', existingSubscription);
-            } else {
+            if (!subscription) {
                 //TODO: getPublicKey
                 let response = await socket.send({
                     method: 'notification.publicKey',
@@ -27,31 +22,31 @@ async function handlePushPermission() {
                     return
 
                 // Create a new subscription
-                const newSubscription = await registration.pushManager.subscribe({
+                subscription = await registration.pushManager.subscribe({
                     userVisibleOnly: true,
                     applicationServerKey: response.publicKey,
                 });
 
-                await socket.send({
+            }
+
+            await socket.send({
+                method: 'notification.subscription',
+                subscription: subscription
+            })
+
+            console.log('New subscription created:', subscription);
+
+            navigator.serviceWorker.addEventListener('pushsubscriptionchange', (event) => {
+                // Handle the subscription change here
+                const newSubscription = event.newSubscription;
+                const oldSubscription = event.oldSubscription;
+
+                socket.send({
                     method: 'notification.subscription',
-                    subscription: newSubscription
+                    subscription: subscription
                 })
 
-                console.log('New subscription created:', newSubscription);
-
-                navigator.serviceWorker.addEventListener('pushsubscriptionchange', (event) => {
-                    // Handle the subscription change here
-                    const newSubscription = event.newSubscription;
-                    const oldSubscription = event.oldSubscription;
-
-                    socket.send({
-                        method: 'notification.subscription',
-                        subscription: newSubscription
-                    })
-
-                });
-
-            }
+            });
         } catch (error) {
             console.error('Error handling push subscription:', error);
         }

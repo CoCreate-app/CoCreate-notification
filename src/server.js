@@ -24,66 +24,99 @@ class CoCreateNotification {
         let subscription = this.subscriptions.has(data.clientId)
         if (!subscription) {
             // let newKeys = this.generateVapidKeys()
-            let newKeys = webpush.generateVAPIDKeys()
-
-            console.log('Before: ', newKeys.publicKey)
-            webpush.setVapidDetails(
-                'mailto:contact@cocreate.app',
-                newKeys.publicKey,
-                newKeys.privateKey
-            );
-
-            // Request a VAPID key
-            const vapidRequest = webpush.generateRequestDetails();
-            console.log('vapidRequest: ', vapidRequest)
-
-            data.publicKey = this.base64URLEncode(base64URLEncode(vapidRequest.keys.p256dh))
-            this.newKeyMap.set(data.clientId, { publicKey: data.publicKey, privateKey: this.base64URLEncode(vapidRequest.keys.auth) })
-        } else {
-            data.publicKey = subscription.publicKey
+            subscription = webpush.generateVAPIDKeys()
+            this.newKeyMap.set(data.clientId, subscription)
         }
 
-        console.log('After: ', data.publicKey)
+        console.log('subscription: ', subscription)
+
+        data.publicKey = subscription.publicKey
         if (data.socket)
             this.socket.send(data)
-
     }
 
     async subscription(data) {
         let newKeys = this.newKeyMap.get(data.clientId)
         if (newKeys) {
             this.newKeyMap.delete(data.clientId)
+
             this.subscriptions.set(data.clientId, { ...newKeys, ...data.subscription })
         } else {
             newKeys = this.subscriptions.get(data.clientId)
             if (newKeys) {
                 newKeys = { ...newKeys, ...data.subscription }
             } else {
-                newKeys = {}
+                newKeys = await this.crud.send({
+                    method: 'read.object',
+                    array: 'clients',
+                    object: {
+                        _id: data.clientId
+                    }
+                })
+                if (newKeys && newKeys.object && newKeys.object[0]) {
+                    newKeys = newKeys.object[0]
+                    newKeys = { ...newKeys, ...data.subscription }
+                    this.subscriptions.set(data.clientId, { ...newKeys, ...data.subscription })
+                } else {
+                    this.publicKey(data)
+                    this.subscription(data)
+                }
             }
+
         }
 
-        crud.send({
-            method: 'update.object',
-            array: 'keys',
-            object: {
-                ...data.subscription,
-                ...newKeys
-            }
-        });
+        if (newKeys) {
+            let tokenOptions = {
+                vapidDetails: {
+                    subject: 'mailto:contact@cocreate.app',
+                    publicKey: newKeys.publicKey,
+                    privateKey: newKeys.privateKey
+                },
+                // Other optional options can be included here
+            };
 
+            const jwt = webpush.generateRequestDetails(data.subscription, null, tokenOptions);
+
+            this.crud.send({
+                method: 'update.object',
+                array: 'clients',
+                object: {
+                    _id: data.clientId,
+                    ...data.subscription,
+                    ...newKeys,
+                    jwt
+                },
+                upsert: true,
+                organization_id: data.organization_id
+            });
+        }
     };
 
     // Load the client's subscription object from storage
-    send(data) {
-        const key = crud.send({ array: 'keys', filter: { query: [{}] } });
+    async send(data) {
+        let subscription = this.subscriptions.get(data.clientId)
+        if (!subscription) {
+            try {
+                subscription = await this.crud.send({
+                    method: 'read.object',
+                    array: 'clients',
+                    object: {
+                        _id: data.clientId
+                    },
+                    organization_id: data.organization_id
 
-        const subscription = key.object[0]
+                })
+            } catch (error) {
+                console.log(error)
+            }
+            if (subscription && subscription.object && subscription.object[0])
+                subscription = subscription.object[0]
+        }
         if (!subscription || !subscription.privateKey)
             return
 
         const cutoffDate = new Date();
-        cutoffDate.setDate(cutoffDate.getDate() - subscription.rotateKeysIn || 90);
+        cutoffDate.setDate(cutoffDate.getDate() - 90);
 
         // Compare the modification time with the cutoff date
         if (!this.newKeyMap.has(data.clientId) && subscription.privateKeyCreatedOn < cutoffDate) {
@@ -94,15 +127,25 @@ class CoCreateNotification {
         if (data.payload && !data.payload.timestamp)
             data.payload.timestamp = Date.now()
 
-        let payload = { ...subscription, ...data.payload }
-        delete payload.privateKey
-        delete payload.publicKey
-        payload = JSON.stringify(payload);
+        // let payload = data.payload
+        // delete payload.privateKey
+        // delete payload.publicKey
+
+        let tokenOptions = {
+            vapidDetails: {
+                subject: 'mailto:contact@cocreate.app',
+                publicKey: subscription.publicKey,
+                privateKey: subscription.privateKey
+            },
+            // Other optional options can be included here
+        };
+
+        const jwt = webpush.generateRequestDetails(subscription, payload, tokenOptions);
 
         const options = {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${this.getVapidJWT(subscription.privateKey)}`,
+                'Authorization': `Bearer ${jwt.headers.Authorization}`,
                 'Content-Type': 'application/json',
             },
         };
