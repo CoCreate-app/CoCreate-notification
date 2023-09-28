@@ -140,12 +140,14 @@ class CoCreateNotification {
             // Other optional options can be included here
         };
 
-        const jwt = webpush.generateRequestDetails(subscription, payload, tokenOptions);
+        const jwt = webpush.generateRequestDetails(subscription.endpoint, payload, tokenOptions);
+        const apiKey = getAPIKeyForEndpoint(subscrption.endpoint);
+
 
         const options = {
             method: 'POST',
             headers: {
-                'Authorization': `Bearer ${jwt.headers.Authorization}`,
+                'Authorization': `Bearer ${apiKey || jwt.headers.Authorization}`,
                 'Content-Type': 'application/json',
             },
         };
@@ -160,6 +162,26 @@ class CoCreateNotification {
 
         pushRequest.write(payload);
         pushRequest.end();
+    }
+
+    getAPIKeyForEndpoint(endpoint) {
+        // Define the mapping of browser endpoints to API keys
+        const browserEndpointsAndAPIKeys = {
+            'https://fcm.googleapis.com/': 'yourFCMApiKey',
+            'https://updates.push.services.mozilla.com/wpush/v2/': 'yourMozillaPushServiceApiKey',
+            'https://api.push.apple.com/': 'yourAPNsApiKey', // For Safari on Mac
+            'https://api.sandbox.push.apple.com/': 'yourAPNsDevApiKey', // For Safari on iOS (Development)
+            'https://api.push.apple.com/': 'yourAPNsProdApiKey', // For Safari on iOS (Production)
+            // Add more browser endpoints and their API keys as needed
+        };
+
+        // Iterate through the keys in the mapping
+        for (const browserEndpoint of Object.keys(browserEndpointsAndAPIKeys)) {
+            if (endpoint.startsWith(browserEndpoint)) {
+                // Return the associated API key if the endpoint starts with a known browser endpoint
+                return browserEndpointsAndAPIKeys[browserEndpoint];
+            }
+        }
     }
 
     generateVapidKeys() {
