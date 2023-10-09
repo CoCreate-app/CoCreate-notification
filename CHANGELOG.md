@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.1.1...v1.1.2) (2023-10-09)
+
+
+### Bug Fixes
+
+* bump dependencies ([777feac](https://github.com/CoCreate-app/CoCreate-notification/commit/777feacdd35236331b6249ce08ff69a8022fd03d))
+
 ## [1.1.1](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.1.0...v1.1.1) (2023-10-09)
 
 
