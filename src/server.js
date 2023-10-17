@@ -16,10 +16,23 @@ class CoCreateNotification {
             this.socket.on('notification.publicKey', (data) => this.publicKey(data));
             this.socket.on('notification.subscription', (data) => this.subscription(data));
             this.socket.on('notification.send', (data) => this.send(data));
+            this.socket.on('notification.user', (data) => this.addUser(data));
         }
     }
 
     // Function to generate VAPID keys (public and private)
+    addUser(data) {
+        this.crud.send({
+            method: 'update.object',
+            array: 'clients',
+            object: {
+                _id: data.clientId,
+                user_id: data.user_id
+            },
+            organization_id: data.organization_id
+        })
+    }
+
     publicKey(data) {
         let subscription = this.subscriptions.has(data.clientId)
         if (!subscription) {
