@@ -1,3 +1,10 @@
+# [1.2.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.1.5...v1.2.0) (2023-10-17)
+
+
+### Features
+
+* addUser() to define the user_id in clients ([94b420e](https://github.com/CoCreate-app/CoCreate-notification/commit/94b420edb17df9d51f6399e474b096b34b185efb))
+
 ## [1.1.5](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.1.4...v1.1.5) (2023-10-14)
 
 
