@@ -23,7 +23,7 @@ class CoCreateNotification {
     // Function to generate VAPID keys (public and private)
     addUser(data) {
         this.crud.send({
-            method: 'update.object',
+            method: 'object.update',
             array: 'clients',
             object: {
                 _id: data.clientId,
@@ -60,7 +60,7 @@ class CoCreateNotification {
                 newKeys = { ...newKeys, ...data.subscription }
             } else {
                 newKeys = await this.crud.send({
-                    method: 'read.object',
+                    method: 'object.read',
                     array: 'clients',
                     object: {
                         _id: data.clientId
@@ -91,7 +91,7 @@ class CoCreateNotification {
             const jwt = webpush.generateRequestDetails(data.subscription, null, tokenOptions);
 
             this.crud.send({
-                method: 'update.object',
+                method: 'object.update',
                 array: 'clients',
                 object: {
                     _id: data.clientId,
@@ -111,7 +111,7 @@ class CoCreateNotification {
         if (!subscription) {
             try {
                 subscription = await this.crud.send({
-                    method: 'read.object',
+                    method: 'object.read',
                     array: 'clients',
                     object: {
                         _id: data.clientId
