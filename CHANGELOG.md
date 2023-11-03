@@ -1,3 +1,12 @@
+## [1.2.2](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.2.1...v1.2.2) (2023-11-03)
+
+
+### Bug Fixes
+
+* favicon.ico path ([0e403a1](https://github.com/CoCreate-app/CoCreate-notification/commit/0e403a1f08f1bd4aa4e150002514090d50398cb8))
+* update dependencies to the lates versions ([cb951cd](https://github.com/CoCreate-app/CoCreate-notification/commit/cb951cdcd704594b0f8a0872b00570e5644bb4fc))
+* update method to use object.update etc ([39f2368](https://github.com/CoCreate-app/CoCreate-notification/commit/39f23689808d1a9528187d009f6aef44dd0d0c6c))
+
 ## [1.2.1](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.2.0...v1.2.1) (2023-10-25)
 
 
