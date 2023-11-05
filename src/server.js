@@ -262,7 +262,7 @@ const payloadExample = {
         { action: 'action-1', title: 'Action 1' },
         { action: 'action-2', title: 'Action 2' },
     ],
-    timestamp: Date.now(), // A timestamp for the notification
+    timestamp: new Date().toISOString(), // A timestamp for the notification
 }
 
 
