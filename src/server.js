@@ -128,7 +128,7 @@ class CoCreateNotification {
         if (!subscription || !subscription.privateKey)
             return
 
-        const cutoffDate = new Date();
+        const cutoffDate = new Date(new Date().toISOString());
         cutoffDate.setDate(cutoffDate.getDate() - 90);
 
         // Compare the modification time with the cutoff date
@@ -138,7 +138,7 @@ class CoCreateNotification {
         }
 
         if (data.payload && !data.payload.timestamp)
-            data.payload.timestamp = Date.now()
+            data.payload.timestamp = new Date().toISOString()
 
         // let payload = data.payload
         // delete payload.privateKey
