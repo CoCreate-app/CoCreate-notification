@@ -12,8 +12,7 @@ module.exports = {
                 "pathname": "/docs/notification/index.html",
                 "src": "{{./docs/index.html}}",
                 "host": [
-                    "*",
-                    "general.cocreate.app"
+                    "*"
                 ],
                 "directory": "notification",
                 "content-type": "{{content-type}}",
