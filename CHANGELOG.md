@@ -1,3 +1,13 @@
+## [1.2.3](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.2.2...v1.2.3) (2023-11-09)
+
+
+### Bug Fixes
+
+* meta name typo ([302ccb4](https://github.com/CoCreate-app/CoCreate-notification/commit/302ccb4f1e928e1eee1775a1359d9bbbbedd6df7))
+* update host ([f031818](https://github.com/CoCreate-app/CoCreate-notification/commit/f031818031eeedd1f34d648b2b7a45d7fda1e5e5))
+* updated timestamp to ISO format with UTC timezone ([f5c72fc](https://github.com/CoCreate-app/CoCreate-notification/commit/f5c72fc7f1cebc6382ab11e10e90b4b50d7c25e7))
+* updated timestamp to ISO format with UTC timezone ([d997a36](https://github.com/CoCreate-app/CoCreate-notification/commit/d997a3630bf02cc60a5fe9f5f8dc6a184419992f))
+
 ## [1.2.2](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.2.1...v1.2.2) (2023-11-03)
 
 
