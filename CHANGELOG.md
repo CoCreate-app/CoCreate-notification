@@ -1,3 +1,10 @@
+# [1.3.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.2.4...v1.3.0) (2023-11-19)
+
+
+### Features
+
+* update dependecies for th latest features and bug fixes ([4738480](https://github.com/CoCreate-app/CoCreate-notification/commit/4738480c6b5cc3a2c76a9efa33a5d0c390358cb7))
+
 ## [1.2.4](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.2.3...v1.2.4) (2023-11-12)
 
 
