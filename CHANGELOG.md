@@ -1,3 +1,15 @@
+# [1.4.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.3.0...v1.4.0) (2023-11-25)
+
+
+### Bug Fixes
+
+* update nav, edit button and css path ([dadd55a](https://github.com/CoCreate-app/CoCreate-notification/commit/dadd55a2f6655adc9052e1c3b5f94d651a8c03e0))
+
+
+### Features
+
+* upgrade dependencies for latest features and fixes ([6d5a226](https://github.com/CoCreate-app/CoCreate-notification/commit/6d5a2261ca4f55e1e4fd71c6d928323f8e610ac6))
+
 # [1.3.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.2.4...v1.3.0) (2023-11-19)
 
 
