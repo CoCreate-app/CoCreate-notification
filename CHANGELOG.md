@@ -1,3 +1,15 @@
+# [1.5.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.4.0...v1.5.0) (2023-11-25)
+
+
+### Bug Fixes
+
+* update licensing details ([6a94b18](https://github.com/CoCreate-app/CoCreate-notification/commit/6a94b18221048c81c0031e2542be2a232063a385))
+
+
+### Features
+
+* upgrade dependencies for latest features and fixes ([723e3c6](https://github.com/CoCreate-app/CoCreate-notification/commit/723e3c6632f13268524c863ff58769e92c8d5efa))
+
 # [1.4.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.3.0...v1.4.0) (2023-11-25)
 
 
