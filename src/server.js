@@ -154,7 +154,7 @@ class CoCreateNotification {
         };
 
         const jwt = webpush.generateRequestDetails(subscription.endpoint, payload, tokenOptions);
-        const apiKey = getAPIKeyForEndpoint(subscrption.endpoint);
+        const apiKey = getAPIKeyForEndpoint(subscription.endpoint);
 
 
         const options = {
