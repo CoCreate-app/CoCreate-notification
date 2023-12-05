@@ -1,3 +1,10 @@
+## [1.5.1](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.5.0...v1.5.1) (2023-12-05)
+
+
+### Bug Fixes
+
+* typo ([c784c30](https://github.com/CoCreate-app/CoCreate-notification/commit/c784c30a2de58eb3d3a0001986dbaacecb8abd09))
+
 # [1.5.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.4.0...v1.5.0) (2023-11-25)
 
 
