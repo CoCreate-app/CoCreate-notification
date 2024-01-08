@@ -24,6 +24,7 @@ class CoCreateNotification {
     addUser(data) {
         this.crud.send({
             method: 'object.update',
+            host: data.host,
             array: 'clients',
             object: {
                 _id: data.clientId,
@@ -61,6 +62,7 @@ class CoCreateNotification {
             } else {
                 newKeys = await this.crud.send({
                     method: 'object.read',
+                    host: data.host,
                     array: 'clients',
                     object: {
                         _id: data.clientId
@@ -92,6 +94,7 @@ class CoCreateNotification {
 
             this.crud.send({
                 method: 'object.update',
+                host: data.host,
                 array: 'clients',
                 object: {
                     _id: data.clientId,
@@ -112,6 +115,7 @@ class CoCreateNotification {
             try {
                 subscription = await this.crud.send({
                     method: 'object.read',
+                    host: data.host,
                     array: 'clients',
                     object: {
                         _id: data.clientId
