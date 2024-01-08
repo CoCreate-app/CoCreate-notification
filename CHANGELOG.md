@@ -1,3 +1,15 @@
+# [1.6.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.5.1...v1.6.0) (2024-01-08)
+
+
+### Bug Fixes
+
+* applied host to define environment/branch ([2bb6e41](https://github.com/CoCreate-app/CoCreate-notification/commit/2bb6e413827d17a2cf927ee5b8b18da325e7049a))
+
+
+### Features
+
+* bumped CoCreate dependencies to their latest versions ([b90262a](https://github.com/CoCreate-app/CoCreate-notification/commit/b90262a061b44d0d2a9eb828b7127387b5b3cc21))
+
 ## [1.5.1](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.5.0...v1.5.1) (2023-12-05)
 
 
