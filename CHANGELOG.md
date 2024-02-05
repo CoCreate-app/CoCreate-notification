@@ -1,3 +1,10 @@
+## [1.6.1](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.6.0...v1.6.1) (2024-02-05)
+
+
+### Bug Fixes
+
+* Removed https://cdn.cocreate.app/latest/CoCreate.min.css ([db5ee1e](https://github.com/CoCreate-app/CoCreate-notification/commit/db5ee1e5829f7405c730170734d8c203189be05d))
+
 # [1.6.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.5.1...v1.6.0) (2024-01-08)
 
 
