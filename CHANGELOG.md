@@ -1,3 +1,11 @@
+## [1.6.3](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.6.2...v1.6.3) (2024-06-12)
+
+
+### Bug Fixes
+
+* bump cocreate dependencies ([089148d](https://github.com/CoCreate-app/CoCreate-notification/commit/089148d37f6641866cb0e79573cad377ee2c3719))
+* svg icon class ([7095abc](https://github.com/CoCreate-app/CoCreate-notification/commit/7095abc9708d30638567cd9371b5adf1a7361bec))
+
 ## [1.6.2](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.6.1...v1.6.2) (2024-04-29)
 
 
