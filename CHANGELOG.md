@@ -1,3 +1,10 @@
+## [1.6.4](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.6.3...v1.6.4) (2024-06-23)
+
+
+### Bug Fixes
+
+* update dependencies ([898aaf5](https://github.com/CoCreate-app/CoCreate-notification/commit/898aaf5c6c5eb7b25285a419d0633e49d37c28b7))
+
 ## [1.6.3](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.6.2...v1.6.3) (2024-06-12)
 
 
