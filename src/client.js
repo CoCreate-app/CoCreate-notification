@@ -57,8 +57,9 @@ async function handlePushPermission() {
 }
 
 // Call the function when the user interacts with a relevant UI element (e.g., a button)
-document.querySelector('[actions*="notification.subscribe"]').addEventListener('click', handlePushPermission);
-
+let element = document.querySelector('[actions*="notification.subscribe"]')
+if (element)
+    element.addEventListener('click', handlePushPermission);
 // actions.init({
 //     name: "notification",
 //     endEvent: "notification",
