@@ -1,3 +1,17 @@
+# [1.7.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.6.5...v1.7.0) (2024-11-04)
+
+
+### Bug Fixes
+
+* event condition ([d2a90da](https://github.com/CoCreate-app/CoCreate-notification/commit/d2a90da5d9d3d865467c036b2275bd5ae54b34e8))
+* pretier.config.js and file formating ([d6b5f6f](https://github.com/CoCreate-app/CoCreate-notification/commit/d6b5f6ff70686520a208e67e773378c92e168b36))
+
+
+### Features
+
+* add prettier.config.js and format files ([941bc61](https://github.com/CoCreate-app/CoCreate-notification/commit/941bc61b941ba421dadee355d5e50365d60a0cf3))
+* add prettier.config.js and format files ([df1b112](https://github.com/CoCreate-app/CoCreate-notification/commit/df1b1128d332b83bd8aab498a1144c6f8039b6f3))
+
 ## [1.6.5](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.6.4...v1.6.5) (2024-06-23)
 
 
