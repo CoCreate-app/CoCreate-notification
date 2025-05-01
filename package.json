@@ -53,8 +53,8 @@
     "webpack-log": "^3.0.1"
   },
   "dependencies": {
-    "@cocreate/actions": "^1.21.0",
-    "@cocreate/socket-client": "^1.40.1",
+    "@cocreate/actions": "^1.21.1",
+    "@cocreate/socket-client": "^1.40.2",
     "web-push": "^3.6.6"
   }
 }
