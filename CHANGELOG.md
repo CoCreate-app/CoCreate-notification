@@ -1,3 +1,14 @@
+## [1.7.1](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.7.0...v1.7.1) (2025-05-01)
+
+
+### Bug Fixes
+
+* added css-loader ([7c28146](https://github.com/CoCreate-app/CoCreate-notification/commit/7c281462ea4a690219ab0b2f5f49d12bc4f547b6))
+* update [@cocreate](https://github.com/cocreate) dependencies ([e1d91d7](https://github.com/CoCreate-app/CoCreate-notification/commit/e1d91d7334322ee56cdf4429a10b22e01fb20b23))
+* update query attributes ([2d1719f](https://github.com/CoCreate-app/CoCreate-notification/commit/2d1719f9cfabf3ad7159d0d4ffe1f3cf917fb548))
+* updated cocreate modules versions ([5a4e31b](https://github.com/CoCreate-app/CoCreate-notification/commit/5a4e31b28dc543713e7f3839add03521c9bb2b1e))
+* webpack.config and devdependencies ([7855354](https://github.com/CoCreate-app/CoCreate-notification/commit/7855354cbc1dea8b2a2b64ae1f258f90a5a66029))
+
 # [1.7.0](https://github.com/CoCreate-app/CoCreate-notification/compare/v1.6.5...v1.7.0) (2024-11-04)
 
 
